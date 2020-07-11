@@ -11,11 +11,11 @@
 
 /* ---- Base Rules ---- */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: #111;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -32,13 +32,14 @@ body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     margin: 0;
-    font-family: 'Merriweather', serif;
+    /* font-family: 'Merriweather', serif; */
+    font-family: Arial, Helvetica, sans-serif;
     color: #fff;
 }
 
 /* Typeography General*/
 h1 {
-    font-family: 'Fira Sans', sans-serif;
+    /* font-family: 'Fira Sans', sans-serif; */
     font-size: 3em;
     margin: 2em 1rem;
 }
@@ -96,20 +97,20 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     cursor: pointer;
 }
 
 .navbar__menu .menu__link.active,
 .navbar__menu .menu__link:hover {
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #111;
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: #111;
     position: fixed;
     top: 0;
     width: 100%;
@@ -118,7 +119,7 @@ section {
 
 /* Footer Styles */
 .page__footer {
-    background: #000;
+    background: #111;
     padding: .5em;
     text-align: center;
     color: #fff;
@@ -240,4 +241,50 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+
+@media (max-width: 300px) {
+
+}
+
+/* Mobile */
+
+.page__header .open,
+.page__header .close {
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+
+.page__header.mobile .open, 
+.page__header.mobile .close {
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+}
+
+.page__header.mobile .open {
+    right: -35px;
+}
+
+.page__header.mobile .close {
+    right: 5px;
+} 
+
+.page__header.mobile {
+    height: 100vh;
+    padding: 50px 0;
+    width: 90vw;
+    transition: .4s;
+    transform: translateX(-100%);
+}
+
+.page__header.mobile.opened {
+    transform: none;
+}
+
+.page__header.mobile.opened ul {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }

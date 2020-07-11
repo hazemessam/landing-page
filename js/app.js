@@ -11,22 +11,39 @@
  * 
  * JS Standard: ESlint
  * 
-*/
+ */
 
 /**
  * Define Global Variables
  * 
-*/
-const sections = document.querySelectorAll('section');
+ */
+const header = document.querySelector('.page__header.mobile');
 const navUl = document.querySelector('nav ul');
+const sections = document.querySelectorAll('section');
+const openNavBtn = document.querySelector('i.open');
+const closeNavBtn = document.querySelector('i.close');
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
+const openNavHandler = () => {
+    header.classList.add('opened');
+    openNavBtn.style.display = 'none';
+}
 
+const closeNavHandler = () => {
+    header.classList.remove('opened');
+    openNavBtn.style.display = 'inline-block';
+}
 
-
+const scrollToSecHandler = (e) => {
+    e.preventDefault();
+    const secId = e.target.getAttribute('sec-id');
+    const targetSection = document.getElementById(secId);
+    closeNavHandler()
+    window.scrollTo(0, targetSection.offsetTop + 1);
+}
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -42,11 +59,6 @@ for(let section of sections) {
             ${section.getAttribute('data-nav')}
         </a>
     `
-    // const a = document.createElement('a');
-    // a.textContent = section.getAttribute('data-nav');
-    // a.setAttribute('sec-id', section.getAttribute('id'));
-    // a.classList.add('menu__link');
-    // li.appendChild(a);
     docFrag.appendChild(li);
 }
 navUl.appendChild(docFrag);
@@ -65,10 +77,6 @@ for(let section of sections) {
         }
     });
 }
-
-// Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
  * Begin Events
@@ -78,18 +86,13 @@ for(let section of sections) {
 // Build menu 
 
 // Scroll to section on link click
-const scrollToSecHandler = (e) => {
-    e.preventDefault();
-    const secId = e.target.getAttribute('sec-id');
-    const targetSection = document.getElementById(secId);
-    window.scrollTo(0, targetSection.offsetTop + 1);
-}
-
 const links = document.querySelectorAll('.menu__link');
 for(let link of links) {
     link.addEventListener('click', scrollToSecHandler);
 }
-// Set sections as active
 
+// Open the nav
+openNavBtn.addEventListener('click', openNavHandler);
 
-// Make nav fixed on scroll
+// Close the nav
+closeNavBtn.addEventListener('click', closeNavHandler);
