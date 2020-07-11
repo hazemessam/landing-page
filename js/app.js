@@ -18,7 +18,6 @@
  * 
 */
 const sections = document.querySelectorAll('section');
-const nav = document.querySelector('nav');
 const navUl = document.querySelector('nav ul');
 /**
  * End Global Variables
@@ -38,11 +37,16 @@ const navUl = document.querySelector('nav ul');
 const docFrag = document.createDocumentFragment();
 for(let section of sections) {
     const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.textContent = section.getAttribute('data-nav');
-    a.setAttribute('sec-id', section.getAttribute('id'));
-    a.classList.add('menu__link');
-    li.appendChild(a);
+    li.innerHTML = `
+        <a sec-id="${section.getAttribute('id')}" class="menu__link">
+            ${section.getAttribute('data-nav')}
+        </a>
+    `
+    // const a = document.createElement('a');
+    // a.textContent = section.getAttribute('data-nav');
+    // a.setAttribute('sec-id', section.getAttribute('id'));
+    // a.classList.add('menu__link');
+    // li.appendChild(a);
     docFrag.appendChild(li);
 }
 navUl.appendChild(docFrag);
@@ -50,10 +54,15 @@ navUl.appendChild(docFrag);
 // Add class 'active' to section when near top of viewport
 for(let section of sections) {
     document.addEventListener('scroll', () => {
-        if(window.scrollY >= section.offsetTop && window.scrollY <= section.offsetTop + section.offsetHeight)
+        const secLink = document.querySelector(`a[sec-id="${section.id}"]`);
+        if(window.scrollY >= section.offsetTop && window.scrollY <= section.offsetTop + section.offsetHeight) {
             section.classList.add('your-active-class');
-        else
+            secLink.classList.add('active');
+        }
+        else {
             section.classList.remove('your-active-class');
+            secLink.classList.remove('active');
+        }
     });
 }
 
@@ -73,7 +82,7 @@ const scrollToSecHandler = (e) => {
     e.preventDefault();
     const secId = e.target.getAttribute('sec-id');
     const targetSection = document.getElementById(secId);
-    targetSection.scrollIntoView();
+    window.scrollTo(0, targetSection.offsetTop + 1);
 }
 
 const links = document.querySelectorAll('.menu__link');
@@ -84,6 +93,3 @@ for(let link of links) {
 
 
 // Make nav fixed on scroll
-// document.addEventListener('scroll', () => {
-
-// })
