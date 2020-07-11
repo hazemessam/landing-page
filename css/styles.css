@@ -243,35 +243,32 @@ section.your-active-class .landing__container::after {
 	}
 }
 
-@media (max-width: 300px) {
-
-}
-
-/* Mobile */
+/* stacked */
 
 .page__header .open,
 .page__header .close {
+    display: none;
     width: 30px;
     height: 30px;
-    display: none;
+    cursor: pointer;
 }
 
-.page__header.mobile .open, 
-.page__header.mobile .close {
+.page__header.stacked .open, 
+.page__header.stacked .close {
     display: inline-block;
     position: absolute;
     top: 5px;
 }
 
-.page__header.mobile .open {
+.page__header.stacked .open {
     right: -35px;
 }
 
-.page__header.mobile .close {
+.page__header.stacked .close {
     right: 5px;
 } 
 
-.page__header.mobile {
+.page__header.stacked {
     height: 100vh;
     padding: 50px 0;
     width: 90vw;
@@ -279,11 +276,11 @@ section.your-active-class .landing__container::after {
     transform: translateX(-100%);
 }
 
-.page__header.mobile.opened {
+.page__header.stacked.opened {
     transform: none;
 }
 
-.page__header.mobile.opened ul {
+.page__header.stacked.opened ul {
     display: flex;
     flex-direction: column;
     text-align: center;

@@ -17,7 +17,7 @@
  * Define Global Variables
  * 
  */
-const header = document.querySelector('.page__header.mobile');
+const header = document.querySelector('.page__header');
 const navUl = document.querySelector('nav ul');
 const sections = document.querySelectorAll('section');
 const openNavBtn = document.querySelector('i.open');
@@ -41,14 +41,26 @@ const scrollToSecHandler = (e) => {
     e.preventDefault();
     const secId = e.target.getAttribute('sec-id');
     const targetSection = document.getElementById(secId);
-    closeNavHandler()
-    window.scrollTo(0, targetSection.offsetTop + 1);
+    if(header.classList.contains('stacked'))
+        closeNavHandler()
+    window.scrollTo(0, targetSection.offsetTop + 5);
 }
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
 */
+
+// Detect screen size
+if (window.innerWidth <= 480)
+    header.classList.add('stacked');
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 480)
+        header.classList.add('stacked');
+    else
+        header.classList.remove('stacked');
+});
 
 // build the nav
 const docFrag = document.createDocumentFragment();
